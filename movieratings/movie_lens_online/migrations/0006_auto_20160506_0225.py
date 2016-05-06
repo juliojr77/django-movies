@@ -16,7 +16,7 @@ def import_ratings(apps, schema_editor):
     Rating = apps.get_model("movie_lens_online", "Rating")
     Movie = apps.get_model("movie_lens_online", "Movie")
     Rater = apps.get_model("movie_lens_online", "Rater")
-    with open ('/Users/Pipita/movie_lenses/Data/u.data') as ratings_file:
+    with open ('/Users/David/documents/django-movies/django-movies/Data/u.data') as ratings_file:
 
         ratings_dataset = csv.DictReader(ratings_file,  fieldnames=('user_id', 'movie_id', 'rating', ""), delimiter="\t")
 

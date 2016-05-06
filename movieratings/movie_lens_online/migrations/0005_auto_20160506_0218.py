@@ -14,7 +14,7 @@ from movie_lens_online.models import Movie
 def import_movies(apps, schema_editor):
     Movie = apps.get_model("movie_lens_online", "Movie")
 
-    with open ('/Users/Pipita/movie_lenses/Data/u.item', encoding='latin_1') as movie_file:
+    with open ('/Users/David/documents/django-movies/django-movies/Data/u.item', encoding='latin_1') as movie_file:
 
         movie_dataset = csv.DictReader(movie_file, fieldnames=('movie_id', 'movie_title', 'release_date'), delimiter="|")
 

@@ -1,0 +1,12 @@
+<h1>{{ name_finder }}</h1>
+<h3> {{ avg_rating }} </h3>
+
+{% if rating_list %}
+    <ul>
+    {% for rating in rating_list %}
+        <li><a href="/movie_lens_online/rater/{{ rating.rater_id }}/">{{ rating.rater_id }} {{ rating.rating }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

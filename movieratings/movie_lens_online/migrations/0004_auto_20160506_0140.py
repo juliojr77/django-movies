@@ -11,7 +11,7 @@ from movie_lens_online.models import Rater
 def import_raters(apps, schema_editor):
     Rater = apps.get_model("movie_lens_online", "Rater")
 
-    with open ('/Users/Pipita/movie_lenses/Data/u.user') as user_file:
+    with open ('/Users/David/documents/django-movies/django-movies/Data/u.user') as user_file:
 
         user_dataset = csv.DictReader(user_file, fieldnames=('user_id', 'age', 'sex','occupation',  ""), delimiter="|") # 'zip_code',
 
