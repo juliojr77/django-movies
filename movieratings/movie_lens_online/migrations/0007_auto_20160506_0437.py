@@ -5,20 +5,26 @@ from __future__ import unicode_literals
 from django.db import migrations
 
 from movie_lens_online.models import Rater,  Movie,  Rating
-import csv
+
 
 from django.db.models import Avg
 
 
 def get_ave_movie(apps, schema_editor):
+
     Rating = apps.get_model("movie_lens_online", "Rating")
+
     Movie = apps.get_model("movie_lens_online", "Movie")
     #Rater = apps.get_model("movie_lens_online", "Rater")
 
     for movie in Movie.objects.values():
+
         mov = Movie.objects.get(movie_id=movie['movie_id'])
+
         rating = Rating.objects.filter(movie_id=movie['movie_id']).aggregate(Avg('rating'))
+
         mov.avg_rating = (rating['rating__avg'])
+
         mov.save()
 
 
