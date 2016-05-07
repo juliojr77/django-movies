@@ -26,6 +26,7 @@
 
 #-------------------------------------
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Rater(models.Model):
@@ -33,6 +34,8 @@ class Rater(models.Model):
     age = models.CharField(max_length=255)
     sex = models.CharField(max_length=255, default ='')
     occupation = models.CharField(max_length=255)
+    auth_u = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+
 
 class Movie(models.Model):
     movie_id = models.CharField(max_length=255, primary_key=True)

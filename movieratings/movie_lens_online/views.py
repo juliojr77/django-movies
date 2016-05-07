@@ -1,6 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render_to_response
 
 from .models import Rater, Movie, Rating
 
@@ -37,3 +40,24 @@ def raterer(request, user_id):
     context = {'rated_movies_list': rated_movies_list, 'user_id': user_id,
     'age':age, 'sex':sex, 'occupation': occupation}
     return render(request, 'movies/raterer.html', context)
+
+
+
+def login_user(request):
+    state = "Please log in below..."
+    username = password = ''
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                state = "You're successfully logged in!"
+            else:
+                state = "Your account is not active, please contact the site admin."
+        else:
+            state = "Your username and/or password were incorrect."
+
+    return render(request, 'movies/auth.html',{'state':state, 'username': username})
