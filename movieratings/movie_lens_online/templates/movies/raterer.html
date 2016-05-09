@@ -1,15 +1,43 @@
-<h1>User Id: {{ user_id }}</h1>
-<h3> Age: {{ age }} </h3>
-<h3> Sex: {{ sex }} </h3>
-<h3> Occupation: {{ occupation }} </h3>
-<h2> Rated Movies: </h2>
+<style>
+div {
+    margin-bottom: .10px;
+    margin-top: .10px;
+    margin-top: .10px;
+    margin-bottom: .10px;
+    background-color: lightgrey;
+    width: 530px;
+    padding: 15px;
+    /*border: 1px solid navy;*/
+    margin: 25px;*/
+}
+h2.marg{
+  margin-bottom: .10px;
+  margin-top: .10px;
+  margin-top: .10px;
+  margin-bottom: .10px;
+}
+</style>
+<br>
+<h1><u><center>User's Movie ratings page</center></u></h1>
+<br>
+<h2 class='marg'>&nbsp;&nbsp;&nbsp;&nbsp;User's profile info:</h2>
+<h3><div>- Id: {{ user_id }}  &nbsp;&nbsp;&nbsp;&nbsp;   - Age: {{ age }}  &nbsp;&nbsp;&nbsp;&nbsp;    - Sex: {{ sex }}  &nbsp;&nbsp;&nbsp;&nbsp;    - Occupation: {{ occupation }} </div></h3>
+<h2> &nbsp;&nbsp;&nbsp;&nbsp;User previous rated Movies (with IDs): </h2>
+
+
+
 
 {% if rated_movies_list %}
-    <ul>
+    <ol start='1'>
     {% for movie in rated_movies_list %}
-        <li><a href="/movie_lens_online/{{ movie.movie_id }}/">{{ movie.movie_id  }} </a></li>
+
+
+
+        <li><a href="/movie_lens_online/{{ movie.movie_id }}/">{{ movie.movie_name  }}</a>: &nbsp;{{movie.movie_id}} </li>
+
+
     {% endfor %}
-    </ul>
+  </ol>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}

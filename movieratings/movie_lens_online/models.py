@@ -26,7 +26,6 @@
 
 #-------------------------------------
 from django.db import models
-from django.contrib.auth.models import User
 
 # Create your models here.
 class Rater(models.Model):
@@ -34,7 +33,6 @@ class Rater(models.Model):
     age = models.CharField(max_length=255)
     sex = models.CharField(max_length=255, default ='')
     occupation = models.CharField(max_length=255)
-    auth_u = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
 
 class Movie(models.Model):
@@ -42,9 +40,11 @@ class Movie(models.Model):
     movie_title = models.CharField(max_length=255)
     release_date = models.CharField(max_length=255)
     avg_rating = models.FloatField(default=0)
+#    avg_rating = round(models.FloatField(default=0),2)
 
 class Rating(models.Model):
     # movie_id = models.CharField(max_length=255)
     rating = models.IntegerField(default=0)
     rater = models.ForeignKey(Rater, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie_name = models.CharField(max_length=255, default ='')
