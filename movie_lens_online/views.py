@@ -124,8 +124,5 @@ def add_rating(request):
             return render(request, 'movies/add_rating.html', context)
 
 
-
-
-
     context = {'movies': Movie.objects.all()}
     return render(request, 'movies/add_rating.html', context)
