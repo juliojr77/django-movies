@@ -1,0 +1,63 @@
+<br>
+<style>
+div {
+    background-color: lightgrey;
+    width: 530px;
+    padding: 25px;
+    /*border: 1px solid navy;*/
+    margin: 25px;
+}
+</style>
+
+<style>
+.center {
+    background-color: lightgrey;
+    margin: auto;
+    width: 50%;
+    border: 1px solid navy;;
+    padding: 25px;
+}
+</style>
+
+<!--
+
+<form action="" method="post" class="submission-form">
+  {% if form.errors %}
+    <p class="error">Sorry, that is not a valid username or password</p>
+  {% endif %}
+    <label for="username">User name:</label>
+    <input type="text" name="username" id="username">
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
+
+    <input type="submit" value="login" action="http://mysite.com/accounts/login/" />{% csrf_token %}
+    <input type="hidden" name="next" value="{{ next|escape }}" />
+</form> -->
+
+{% include 'movies/login_form.html' %}
+
+
+
+<!-- PAGE HEADER -->
+<br>
+<h1><div class="center"><u><center>Top 20 rated movies</center></u></div></h1>
+<br>
+
+
+{% if top_twenty_list %}
+
+    <ol start="1">
+<!-- TOP 20 MOVIE LIST STARTING FROM 1 -->
+    {% for movie in top_twenty_list %}
+    <!-- Setting the the decimal palces of "movie.avg_rating" value to 2 places  -->
+      <script LANGUAGE="JavaScript">
+        var avg = {{movie.avg_rating}}.toFixed(2);
+      </script>
+
+      <p></p>
+      <li><a href="/movie_lens_online/{{ movie.movie_id }}/">{{ movie.movie_title }}</a> &nbsp;&nbsp; <b>Avg: <script>document.write(avg)</script></b></li>
+    {% endfor %}
+  </ol>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
