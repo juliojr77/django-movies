@@ -25,12 +25,15 @@ h2.marg{
 <h2> &nbsp;&nbsp;&nbsp;&nbsp;User previous rated Movies (with IDs): </h2>
 
 
+
+
 {% if rated_movies_list %}
     <ol start='1'>
     {% for movie in rated_movies_list %}
 
 
-        <li><a href="/movie_lens_online/{{ movie.movie_id }}/">{{movie.movie_id}} </a>: &nbsp;</li>
+
+        <li><a href="/movie_lens_online/{{ movie.movie_id }}/">{{ movie.movie_name  }}</a>: &nbsp;{{movie.movie_id}} </li>
 
 
     {% endfor %}

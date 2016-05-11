@@ -19,7 +19,7 @@ def get_ave_movie(apps, schema_editor):
 
     for movie in Movie.objects.values():
 
-        mov = Movie.objects.get(movie_id= movie['movie_id'])
+        mov = Movie.objects.get(movie_id=movie['movie_id'])
 
         rating = Rating.objects.filter(movie_id=movie['movie_id']).aggregate(Avg('rating'))
 

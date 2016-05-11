@@ -2,10 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
 from django.contrib.auth.models import User
-
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render_to_response
-from django.shortcuts import redirect
 
 from .models import Rater, Movie, Rating
 
@@ -62,67 +60,19 @@ def raterer(request, user_id):
 def login_user(request):
     state = "Please log in below..."
     username = password = ''
-
     if request.POST:
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-
         user = authenticate(username=username, password=password)
-        print(request.POST)
-
-
         if user is not None:
             if user.is_active:
                 login(request, user)
                 state = "You're successfully logged in!"
-                return redirect('add_rating')
-
             else:
                 state = "Your account is not active, please contact the site admin."
-                return redirect('movie')
         else:
             state = "Your username and/or password were incorrect."
-            return redirect('movie')
 
     context = {'state':state, 'username': username}
     return render(request, 'movies/auth.html', {'state':state, 'username': username})
-
-
-def add_rating(request):
-    #print(dir(request))
-    print(dir(request.POST))
-    #print(request.POST.path)
-    # print(request.POST and request.POST['Add_Rating'] == 'Add Rating')
-    print(request.POST.get('Add_Rating', False))
-    print (request.POST.get('movie', False))
-    print(request.POST.values)
-
-    if request.POST.get('Add_Rating', False) and request.POST.get('movie', False):
-
-
-            movie_id = request.POST['movie']
-
-            user_rating = request.POST['rating']
-
-            user_id = request.user.id
-
-            rater = Rater.objects.get(user_id=user_id)
-
-            movie = Movie.objects.get(movie_id=movie_id)
-
-            rating = Rating(rater=rater, rating=user_rating, movie=movie)
-
-            rating.save()
-
-    elif request.POST.get('Exit', False):
-        return redirect('index')
-
-    elif request.POST.get('username', True):
-
-            context = {'movies': Movie.objects.all()}
-            return render(request, 'movies/add_rating.html', context)
-
-
-    context = {'movies': Movie.objects.all()}
-    return render(request, 'movies/add_rating.html', context)
