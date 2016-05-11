@@ -1,9 +1,9 @@
-
 <form action="{% url 'add_rating' %}" method="post">
 
   {% csrf_token %}
 
   <label for="movie">Movie list: </label>
+
   <select name="movie" id="movie">
     {% for movie in movies %}
       <option value="{{ movie.movie_id }}">{{ movie.movie_title }}</option>
@@ -23,5 +23,6 @@
   </select>
   <br>
   <br>
-  <input type="submit" value="Add Rating">
+  <input type="submit" value="Add Rating" name='Add_Rating'>
+  <input type="submit" value="Exit" name='Exit' id='Exit'>
 </form>
